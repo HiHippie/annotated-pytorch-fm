@@ -31,7 +31,7 @@ def get_dataset(name, path):
         return MovieLens20MDataset(path)
     elif name == 'criteo':
         return CriteoDataset(path)
-    elif name == 'avazu':
+    elif name == 'avazu':   
         return AvazuDataset(path)
     else:
         raise ValueError('unknown dataset name: ' + name)
@@ -132,6 +132,8 @@ def test(model, data_loader, device):
     with torch.no_grad():
         for fields, target in tqdm.tqdm(data_loader, smoothing=0, mininterval=1.0):
             fields, target = fields.to(device), target.to(device)
+            import pdb
+            pdb.set_trace()
             y = model(fields)
             targets.extend(target.tolist())
             predicts.extend(y.tolist())
@@ -176,9 +178,9 @@ if __name__ == '__main__':
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset_name', default='criteo')
-    parser.add_argument('--dataset_path', help='criteo/train.txt, avazu/train, or ml-1m/ratings.dat')
-    parser.add_argument('--model_name', default='afi')
+    parser.add_argument('--dataset_name', default='movielens20M')
+    parser.add_argument('--dataset_path', default="datasets/ml-20m/ratings.csv", help='criteo/train.txt, avazu/train, or ml-1m/ratings.dat')
+    parser.add_argument('--model_name', default='lr')
     parser.add_argument('--epoch', type=int, default=100)
     parser.add_argument('--learning_rate', type=float, default=0.001)
     parser.add_argument('--batch_size', type=int, default=2048)

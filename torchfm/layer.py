@@ -1,3 +1,5 @@
+import pdb
+
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -7,6 +9,7 @@ class FeaturesLinear(torch.nn.Module):
 
     def __init__(self, field_dims, output_dim=1):
         super().__init__()
+        pdb.set_trace()
         self.fc = torch.nn.Embedding(sum(field_dims), output_dim)
         self.bias = torch.nn.Parameter(torch.zeros((output_dim,)))
         self.offsets = np.array((0, *np.cumsum(field_dims)[:-1]), dtype=np.long)
@@ -14,7 +17,11 @@ class FeaturesLinear(torch.nn.Module):
     def forward(self, x):
         """
         :param x: Long tensor of size ``(batch_size, num_fields)``
+        
+        nn.Embedding不载入权重时 这里的实现等价于全连接层
         """
+        pdb.set_trace()
+        # 这里需要加offsets是因为self.fc里保存了user和item的embedding look-up, 先user后item，所以给x加offsets[0, N]是为了根据idx匹配到item的embedding
         x = x + x.new_tensor(self.offsets).unsqueeze(0)
         return torch.sum(self.fc(x), dim=1) + self.bias
 

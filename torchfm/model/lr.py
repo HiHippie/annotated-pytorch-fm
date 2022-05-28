@@ -16,4 +16,6 @@ class LogisticRegressionModel(torch.nn.Module):
         """
         :param x: Long tensor of size ``(batch_size, num_fields)``
         """
+        import pdb
+        pdb.set_trace()
         return torch.sigmoid(self.linear(x).squeeze(1))

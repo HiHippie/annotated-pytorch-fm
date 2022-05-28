@@ -20,11 +20,11 @@ class MovieLens20MDataset(torch.utils.data.Dataset):
         data = pd.read_csv(dataset_path, sep=sep, engine=engine, header=header).to_numpy()[:, :3]
         self.items = data[:, :2].astype(np.int) - 1  # -1 because ID begins from 1
         self.targets = self.__preprocess_target(data[:, 2]).astype(np.float32)
-        self.field_dims = np.max(self.items, axis=0) + 1
+        self.field_dims = np.max(self.items, axis=0) + 1  # it denotes the [max user id, max movie id] in rating.csv
         self.user_field_idx = np.array((0, ), dtype=np.long)
         self.item_field_idx = np.array((1,), dtype=np.long)
 
-    def __len__(self):
+    def __len__(self): 
         return self.targets.shape[0]
 
     def __getitem__(self, index):
