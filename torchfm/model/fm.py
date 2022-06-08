@@ -21,8 +21,5 @@ class FactorizationMachineModel(torch.nn.Module):
         """
         :param x: Long tensor of size ``(batch_size, num_fields)``
         """
-        # 这里的x是one-hot + embedding的结果
-        # 虽然公式推导里有v_i参数，但已经包含在了embedding中
-        # 所以这里直接用了x
         x = self.linear(x) + self.fm(self.embedding(x))
         return torch.sigmoid(x.squeeze(1))

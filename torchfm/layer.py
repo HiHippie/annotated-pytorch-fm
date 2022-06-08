@@ -78,6 +78,9 @@ class FactorizationMachine(torch.nn.Module):
         """
         :param x: Float tensor of size ``(batch_size, num_fields, embed_dim)``
         """
+        # 这里的x是one-hot + embedding的结果
+        # 虽然公式推导里有v_i参数，但已经包含在了embedding中
+        # 所以这里直接用了x
         square_of_sum = torch.sum(x, dim=1) ** 2
         sum_of_square = torch.sum(x ** 2, dim=1)
         ix = square_of_sum - sum_of_square
