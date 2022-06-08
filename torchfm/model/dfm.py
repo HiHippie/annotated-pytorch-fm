@@ -24,5 +24,9 @@ class DeepFactorizationMachineModel(torch.nn.Module):
         :param x: Long tensor of size ``(batch_size, num_fields)``
         """
         embed_x = self.embedding(x)
+        # 相比fm, deepfm多了self.mlp(embed_x.view(-1, self.embed_output_dim))这一部分
+        # 也就是deep部分
+        import pdb
+        pdb.set_trace()
         x = self.linear(x) + self.fm(embed_x) + self.mlp(embed_x.view(-1, self.embed_output_dim))
         return torch.sigmoid(x.squeeze(1))
