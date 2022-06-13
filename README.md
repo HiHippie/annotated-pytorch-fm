@@ -1,4 +1,4 @@
-# 中文注释版本，方便入门学习
+# 中文注释版。
 
 # Factorization Machine models in PyTorch
   
@@ -20,20 +20,20 @@ https://rixwew.github.io/pytorch-fm
 ## TODO LIST:
 
 - [ ] afi
-- [ ] afm
+- [x] afm
 - [ ] afn
 - [ ] dcn
 - [ ] dfm
-- [ ] ffm
-- [ ] fm
+- [x] ffm
+- [x] fm
 - [ ] fnfm
 - [ ] fnn
 - [ ] hofm
-- [ ] lr
+- [x] lr
 - [ ] ncf
 - [ ] nfm
 - [ ] pnn
-- [ ] wd
+- [x] wd
 - [ ] xdfm
 
 ## Licence
